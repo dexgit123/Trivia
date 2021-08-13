@@ -7,16 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@RestController("/user")
 public class UserController {
 
     @Autowired
     UserService userService;
 
-//    @GetMapping("/login")
-//    public ResponseEntity<String> login(@RequestBody UserDTO userDTO){
-//
-//    }
+    @GetMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UserDTO userDTO){
+        boolean response = userService.validateUser(userDTO);
+        if(response){
+            return ResponseEntity.accepted().body("Bine Ai Venit");
+        } else
+            return ResponseEntity.badRequest().body("Utilizator sau parola gresita");
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody UserSignupDTO userSignupDTO){

@@ -1,5 +1,6 @@
 package dev.Trivia.servicii;
 
+import dev.Trivia.dto.UserDTO;
 import dev.Trivia.enums.Role;
 import dev.Trivia.dto.UserSignupDTO;
 import dev.Trivia.entitati.Utilizatori;
@@ -21,6 +22,12 @@ public class UserService {
         utilizatori.setTip_user(Role.USER);
 
         userRepository.save(utilizatori);
+    }
+
+    public boolean validateUser(UserDTO userDTO){
+        Utilizatori user =  userRepository.findByEmail(userDTO.email);
+        return userDTO.password.equals(user.getParola());
+
     }
 
 
