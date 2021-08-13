@@ -3,7 +3,6 @@ package dev.Trivia.entitati;
 import javax.persistence.*;
 
 @Entity
-
 public class Intrebari {
 
     @Id
@@ -12,16 +11,19 @@ public class Intrebari {
 
     private String text_intrebare;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Categorii categorii;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private  OptiuniRaspuns optiuniRaspuns;
 
     public Intrebari(String text_intrebare, Categorii categorii, OptiuniRaspuns optiuniRaspuns) {
         this.text_intrebare = text_intrebare;
         this.categorii = categorii;
         this.optiuniRaspuns = optiuniRaspuns;
+    }
+
+    public Intrebari() {
     }
 
     public String getText_intrebare() {
